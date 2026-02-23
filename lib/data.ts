@@ -5,7 +5,8 @@ import type { Row } from "@/lib/types";
 import { toBool, toNum } from "@/lib/utils";
 
 export async function loadRows(): Promise<Row[]> {
-  const res = await fetch("/data/synthetic_eastbrook_user_day.csv", { cache: "no-store" });
+  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+  const res = await fetch(`${base}/data/synthetic_eastbrook_user_day.csv`, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch CSV data.");
   const csv = await res.text();
 
